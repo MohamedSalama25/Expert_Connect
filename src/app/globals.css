@@ -1,0 +1,328 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+/* ===== ExpertConnect Design System: Meridian Slate ===== */
+
+@theme inline {
+  /* -- Shadcn Core Tokens (mapped to ExpertConnect palette) -- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* === Light Mode (default) === */
+:root {
+  /* ExpertConnect Design Tokens */
+  --ec-primary: #006b5f;
+  --ec-primary-container: #14b8a6;
+  --ec-primary-fixed: #71f8e4;
+  --ec-primary-fixed-dim: #4fdbc8;
+  --ec-on-primary: #ffffff;
+  --ec-on-primary-container: #00423b;
+  --ec-on-primary-fixed: #00201c;
+  --ec-on-primary-fixed-variant: #005048;
+
+  --ec-secondary: #565e74;
+  --ec-secondary-container: #dae2fd;
+  --ec-secondary-fixed: #dae2fd;
+  --ec-secondary-fixed-dim: #bec6e0;
+  --ec-on-secondary: #ffffff;
+  --ec-on-secondary-container: #5c647a;
+  --ec-on-secondary-fixed: #131b2e;
+  --ec-on-secondary-fixed-variant: #3f465c;
+
+  --ec-tertiary: #855300;
+  --ec-tertiary-container: #e49200;
+  --ec-tertiary-fixed: #ffddb8;
+  --ec-tertiary-fixed-dim: #ffb95f;
+  --ec-on-tertiary: #ffffff;
+  --ec-on-tertiary-container: #543300;
+  --ec-on-tertiary-fixed: #2a1700;
+  --ec-on-tertiary-fixed-variant: #653e00;
+
+  --ec-surface: #f8f9ff;
+  --ec-surface-dim: #cbdbf5;
+  --ec-surface-bright: #f8f9ff;
+  --ec-surface-container-lowest: #ffffff;
+  --ec-surface-container-low: #eff4ff;
+  --ec-surface-container: #e5eeff;
+  --ec-surface-container-high: #dce9ff;
+  --ec-surface-container-highest: #d3e4fe;
+  --ec-surface-variant: #d3e4fe;
+
+  --ec-on-surface: #0b1c30;
+  --ec-on-surface-variant: #3c4947;
+  --ec-background: #f8f9ff;
+  --ec-on-background: #0b1c30;
+
+  --ec-outline: #6c7a77;
+  --ec-outline-variant: #bbcac6;
+
+  --ec-error: #ba1a1a;
+  --ec-error-container: #ffdad6;
+  --ec-on-error: #ffffff;
+  --ec-on-error-container: #93000a;
+
+  --ec-inverse-surface: #213145;
+  --ec-inverse-on-surface: #eaf1ff;
+  --ec-inverse-primary: #4fdbc8;
+
+  --ec-surface-tint: #006b5f;
+
+  /* Shadcn Variable Mapping */
+  --background: #f8f9ff;
+  --foreground: #0b1c30;
+  --card: #ffffff;
+  --card-foreground: #0b1c30;
+  --popover: #ffffff;
+  --popover-foreground: #0b1c30;
+  --primary: #006b5f;
+  --primary-foreground: #ffffff;
+  --secondary: #eff4ff;
+  --secondary-foreground: #565e74;
+  --muted: #e5eeff;
+  --muted-foreground: #3c4947;
+  --accent: #14b8a6;
+  --accent-foreground: #ffffff;
+  --destructive: #ba1a1a;
+  --border: #bbcac6;
+  --input: #dce9ff;
+  --ring: #006b5f;
+  --radius: 0.75rem;
+
+  --chart-1: #006b5f;
+  --chart-2: #14b8a6;
+  --chart-3: #855300;
+  --chart-4: #565e74;
+  --chart-5: #e49200;
+
+  --sidebar: #eff4ff;
+  --sidebar-foreground: #0b1c30;
+  --sidebar-primary: #006b5f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e5eeff;
+  --sidebar-accent-foreground: #0b1c30;
+  --sidebar-border: #bbcac6;
+  --sidebar-ring: #006b5f;
+}
+
+.dark {
+  /* ExpertConnect Design Tokens (Dark) */
+  --ec-primary: #4fdbc8;
+  --ec-primary-container: #14b8a6;
+  --ec-primary-fixed: #71f8e4;
+  --ec-primary-fixed-dim: #4fdbc8;
+  --ec-on-primary: #003731;
+  --ec-on-primary-container: #00423b;
+  --ec-on-primary-fixed: #00201c;
+  --ec-on-primary-fixed-variant: #005048;
+
+  --ec-secondary: #b9c7e0;
+  --ec-secondary-container: #3c4a5e;
+  --ec-secondary-fixed: #d5e3fd;
+  --ec-secondary-fixed-dim: #b9c7e0;
+  --ec-on-secondary: #233144;
+  --ec-on-secondary-container: #abb9d2;
+  --ec-on-secondary-fixed: #0d1c2f;
+  --ec-on-secondary-fixed-variant: #3a485c;
+
+  --ec-tertiary: #3cddc7;
+  --ec-tertiary-container: #00b8a5;
+  --ec-tertiary-fixed: #62fae3;
+  --ec-tertiary-fixed-dim: #3cddc7;
+  --ec-on-tertiary: #003731;
+  --ec-on-tertiary-container: #00423a;
+  --ec-on-tertiary-fixed: #00201c;
+  --ec-on-tertiary-fixed-variant: #005047;
+
+  --ec-surface: #0b1326;
+  --ec-surface-dim: #0b1326;
+  --ec-surface-bright: #31394d;
+  --ec-surface-container-lowest: #060e20;
+  --ec-surface-container-low: #131b2e;
+  --ec-surface-container: #171f33;
+  --ec-surface-container-high: #222a3d;
+  --ec-surface-container-highest: #2d3449;
+  --ec-surface-variant: #2d3449;
+
+  --ec-on-surface: #dae2fd;
+  --ec-on-surface-variant: #bbcac6;
+  --ec-background: #0b1326;
+  --ec-on-background: #dae2fd;
+
+  --ec-outline: #859490;
+  --ec-outline-variant: #3c4947;
+
+  --ec-error: #ffb4ab;
+  --ec-error-container: #93000a;
+  --ec-on-error: #690005;
+  --ec-on-error-container: #ffdad6;
+
+  --ec-inverse-surface: #dae2fd;
+  --ec-inverse-on-surface: #283044;
+  --ec-inverse-primary: #006b5f;
+  --ec-surface-tint: #4fdbc8;
+
+  /* Shadcn Native Theme (Mapped to EC Dark mode for consistency) */
+  --background: #0b1326;
+  --foreground: #dae2fd;
+  --card: #131b2e;
+  --card-foreground: #dae2fd;
+  --popover: #131b2e;
+  --popover-foreground: #dae2fd;
+  --primary: #4fdbc8;
+  --primary-foreground: #00201c;
+  --secondary: #213145;
+  --secondary-foreground: #b9c7e0;
+  --muted: #213145;
+  --muted-foreground: #bbcac6;
+  --accent: #14b8a6;
+  --accent-foreground: #ffffff;
+  --destructive: #ffdad6;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #4fdbc8;
+
+  --chart-1: #4fdbc8;
+  --chart-2: #14b8a6;
+  --chart-3: #ffb95f;
+  --chart-4: #bec6e0;
+  --chart-5: #e49200;
+
+  --sidebar: #131b2e;
+  --sidebar-foreground: #dae2fd;
+  --sidebar-primary: #4fdbc8;
+  --sidebar-primary-foreground: #00201c;
+  --sidebar-accent: #213145;
+  --sidebar-accent-foreground: #dae2fd;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #4fdbc8;
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  /* LTR: Inter | RTL: Alexandria */
+  html[dir="ltr"],
+  html:not([dir]) {
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  html[dir="rtl"] {
+    font-family: var(--font-alexandria), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Selection Highlight */
+  ::selection {
+    background-color: #14b8a6;
+    color: #00423b;
+  }
+}
+
+/* ===== Custom Utility Classes ===== */
+@layer utilities {
+  .signature-gradient {
+    background: linear-gradient(135deg, #006b5f 0%, #14b8a6 100%);
+  }
+
+  .signature-gradient-text {
+    background: linear-gradient(135deg, #006b5f 0%, #14b8a6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-panel-dark {
+    background: rgba(11, 28, 48, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .ambient-shadow {
+    box-shadow: 0 4px 24px 0 rgba(11, 28, 48, 0.05);
+  }
+
+  .ambient-shadow-lg {
+    box-shadow: 0 8px 40px 0 rgba(11, 28, 48, 0.08);
+  }
+
+  .ghost-border {
+    border: 1px solid rgba(187, 202, 198, 0.15);
+  }
+
+  /* Animated scrollbar hide */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Video overlay gradient */
+  .video-gradient-overlay {
+    background: linear-gradient(0deg, rgba(11, 28, 48, 0.8) 0%, rgba(11, 28, 48, 0) 30%);
+  }
+}

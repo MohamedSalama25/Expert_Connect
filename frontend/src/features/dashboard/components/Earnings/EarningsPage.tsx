@@ -43,7 +43,7 @@ import {
 } from "@/components/ui/chart";
 import { useLocale } from "@/providers/LocaleProvider";
 import { cn } from "@/lib/utils";
-import { DataTable, Column } from "@/features/shared/components/DataTable";
+import { DataTable } from "@/features/shared/components/DataTable";
 
 export function EarningsPage() {
     const { t } = useLocale();

@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CLIENT
+  EXPERT
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id              String   @id @default(uuid())
+  name            String
+  email           String   @unique
+  password        String
+  role            Role     @default(CLIENT)
+  image           String?
+  isEmailVerified Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  refreshTokens  RefreshToken[]
+  expertProfile  ExpertProfile?
+  bookings       Booking[]      @relation("ClientBookings")
+  expertBookings Booking[]      @relation("ExpertBookings")
+  conversations  Conversation[]
+  messages       Message[]
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model ExpertProfile {
+  userId            String  @id
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio               String?
+  title             String
+  hourlyRate        Float
+  yearsOfExperience Int
+  ratingAvg         Float   @default(0)
+  totalReviews      Int     @default(0)
+  isVerified        Boolean @default(false)
+
+  categories   ExpertCategory[]
+  availability Availability[]
+  bookingSlots BookingSlot[]
+}
+
+model Category {
+  id      String           @id @default(uuid())
+  name    String           @unique
+  experts ExpertCategory[]
+}
+
+model ExpertCategory {
+  expertId   String
+  categoryId String
+  expert     ExpertProfile @relation(fields: [expertId], references: [userId], onDelete: Cascade)
+  category   Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([expertId, categoryId])
+}
+
+model Availability {
+  id        String        @id @default(uuid())
+  expertId  String
+  expert    ExpertProfile @relation(fields: [expertId], references: [userId], onDelete: Cascade)
+  dayOfWeek Int // 0-6 (Sunday-Saturday)
+  startTime String // HH:mm
+  endTime   String // HH:mm
+}
+
+model BookingSlot {
+  id        String        @id @default(uuid())
+  expertId  String
+  expert    ExpertProfile @relation(fields: [expertId], references: [userId], onDelete: Cascade)
+  startTime DateTime
+  endTime   DateTime
+  isBooked  Boolean       @default(false)
+  booking   Booking?
+}
+
+model Booking {
+  id         String        @id @default(uuid())
+  clientId   String
+  client     User          @relation("ClientBookings", fields: [clientId], references: [id])
+  expertId   String
+  expert     User          @relation("ExpertBookings", fields: [expertId], references: [id])
+  slotId     String        @unique
+  slot       BookingSlot   @relation(fields: [slotId], references: [id])
+  status     BookingStatus @default(PENDING)
+  totalPrice Float
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  review  Review?
+  payment Payment?
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  bookingId String   @unique
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  bookingId     String   @unique
+  booking       Booking  @relation(fields: [bookingId], references: [id])
+  amount        Float
+  status        String // e.g., s_pd, pending, failed
+  provider      String // e.g., stripe, paypal
+  transactionId String?  @unique
+  createdAt     DateTime @default(now())
+}
+
+model Conversation {
+  id        String    @id @default(uuid())
+  users     User[]
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation(fields: [senderId], references: [id])
+  content        String
+  createdAt      DateTime     @default(now())
+}
